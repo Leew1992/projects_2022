@@ -1,0 +1,32 @@
+server:
+  port: 8850 #服务端口号
+spring:
+  application:
+    name: config-client  #微服务名称，对外暴漏的微服务名称，十分重要
+  cloud:
+    config:
+      label: master #分支名称
+      name: config  #配置文件名称，config-dev.yml 中的 config
+      profile: dev  #环境名  config-dev.yml 中的 dev
+      #这里不要忘记添加 http:// 否则无法读取
+      uri: http://localhost:8800 #Spring Cloud Config 服务端（配置中心）地址
+  rabbitmq: # RabbitMQ 相关配置，15672 是web 管理界面的端口，5672 是 MQ 的访问端口
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server-00:8400/eureka/
+  instance:
+    instance-id: config-client-05
+    prefer-ip-address: true
+    hostname: config-client-05
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"   # * 在yaml 文件属于关键字，所以需要加引号

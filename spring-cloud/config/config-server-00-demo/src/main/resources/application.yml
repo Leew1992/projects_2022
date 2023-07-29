@@ -1,0 +1,41 @@
+server:
+  port: 8800 #服务端口号
+spring:
+  application:
+    name: config-server  #微服务名称，对外暴漏的微服务名称，十分重要
+  cloud:
+    config:
+      server:
+        git:
+          # Git 地址，https://gitee.com/java-mohan/springcloud-config.git
+          # 码云（gitee）地址 uri: https://github.com/javmohan/springcloud-config.git  (github 站点访问较慢，因此这里我们使用 gitee)
+          uri: https://gitee.com/lwzhang/springcloud-config.git
+          #仓库名
+          search-paths:
+            - springcloud-config
+          force-pull: true
+          # 如果Git仓库为公开仓库，可以不填写用户名和密码，如果是私有仓库需要填写
+          username: 776379740@qq.com
+          password: ZLW11214610
+      #分支名
+      label: master
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server-00:8400/eureka/
+  instance:
+    instance-id: config-server
+    prefer-ip-address: true
+    hostname: config-server
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'

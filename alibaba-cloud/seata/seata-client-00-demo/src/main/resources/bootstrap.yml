@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+service-url:
+  nacos-user-service: http://nacos-client-06 #服务提供者的服务名
+

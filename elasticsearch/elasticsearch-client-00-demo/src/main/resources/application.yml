@@ -1,0 +1,12 @@
+# 端口配置
+server:
+  port: 9100
+
+spring:
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+  elasticsearch:
+    rest:
+      uris: localhost:9200

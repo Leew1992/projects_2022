@@ -1,0 +1,23 @@
+# 端口配置
+server:
+  port: 8100
+
+spring:
+  application:
+    name: feign-client  # 微服务名称，对外暴漏的微服务名称，十分重要
+
+eureka:
+  client:
+    register-with-eureka: false # 服务消费者可以不向服务注册中心注册服务
+    fetch-registry: true  # 服务消费者客户端需要去检索服务
+    service-url:
+      defaultZone: http://eureka-server-00:8400/eureka/,http://eureka-server-01:8410/eureka/,http://eureka-server-02:8420/eureka/
+
+ribbon:
+  ReadTimeout: 6000 # 建立连接所用的时间，适用于网络状况正常的情况下，两端两端连接所用的时间
+  ConnectionTimeout: 6000 # 建立连接后，服务器读取到可用资源的时间
+
+logging:
+  level:
+    #feign 日志以什么样的级别监控该接口
+    org.example.client.service.RibbonService: debug

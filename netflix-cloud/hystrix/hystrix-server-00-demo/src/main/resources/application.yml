@@ -1,0 +1,32 @@
+server:
+  port: 8600 # 服务端口号
+spring:
+  application:
+    name: hystrix-server  # 微服务名称，对外暴漏的微服务名称，十分重要
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server-00:8400/eureka/
+
+  instance:
+    instance-id: hystrix-server-00
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app.name: hystrix-server-00
+  company.name: org.example
+  build.aetifactId: @project.artifactId@
+  build.version: @project.version@
+
+# http://localhost:8600/hystrix 熔断器监控页面
+# localhost:8600/actuator/hystrix.stream 监控地址
+hystrix:
+  dashboard:
+    proxy-stream-allow-list:
+      - "localhost"

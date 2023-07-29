@@ -1,0 +1,14 @@
+# 端口配置
+server:
+  port: 8200
+
+# nacos配置
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+  discovery:
+    server-addr: 127.0.0.1:8848
+
+spring:
+  application:
+    name: nacos-client-00

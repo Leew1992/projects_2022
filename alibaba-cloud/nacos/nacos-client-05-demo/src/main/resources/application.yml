@@ -1,0 +1,10 @@
+# 端口配置
+server:
+  port: 8250
+
+# 应用名称
+spring:
+  application:
+    name: nacos-client-05
+  profiles:
+    active: dev #激活 dev 的配置

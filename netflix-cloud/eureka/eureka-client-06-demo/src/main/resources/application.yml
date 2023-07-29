@@ -1,0 +1,25 @@
+server:
+  port: 8460 #服务端口号
+spring:
+  application:
+    name: eureka-client  #微服务名称，对外暴漏的微服务名称，十分重要
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server-00:8400/eureka/,http://eureka-server-01:8410/eureka/,http://eureka-server-02:8420/eureka/
+
+  instance:
+    instance-id: eureka-client-06
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app.name: eureka-client-06
+  company.name: org.example
+  build.aetifactId: @project.artifactId@
+  build.version: @project.version@

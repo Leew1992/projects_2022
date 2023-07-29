@@ -1,0 +1,52 @@
+server:
+  port: 8650 # 服务端口号
+spring:
+  application:
+    name: hystrix-client  # 微服务名称，对外暴漏的微服务名称，十分重要
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server-00:8400/eureka/
+  instance:
+    instance-id: hystrix-client-05
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app.name: hystrix-client-05
+  company.name: org.example
+  build.aetifactId: @project.artifactId@
+  build.version: @project.version@
+
+feign:
+  hystrix:
+    enabled: true # 开启客户端 hystrix
+
+ribbon:
+  ReadTimeout: 6000 # 建立连接所用的时间，适用于网络状况正常的情况下，两端两端连接所用的时间
+  ConnectionTimeout: 6000 # 建立连接后，服务器读取到可用资源的时间
+
+# 配置请求超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+    # 配置具体方法超时时间 为 3 秒
+    RibbonService#sleep(Integer):
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+  # http://localhost:8650/hystrix 熔断器监控页面
+  # localhost:8650/actuator/hystrix.stream 监控地址
+  dashboard:
+    proxy-stream-allow-list:
+      - "localhost"
